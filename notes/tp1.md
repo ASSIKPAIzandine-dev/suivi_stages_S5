@@ -5,13 +5,13 @@ Le modèle Entreprise
 la combinaison de champs qui identifie une entreprise sans ambiguité est  nom et ville de l'entreprise . Deux agences Ecobank (Sokodé et Lomé) sont bien deux
 entreprises différentes.
 
-** l’adresse mail ** est de type EmailField .pas simplement du texte parceque 
+l’adresse mail  est de type EmailField .pas simplement du texte parceque 
 l'adresse mail utilise un champ spécifique de type email  plutôt qu'un simple champ de texte brut pour garantir la validité des données, adapter l'expérience mobile et faciliter l'utilisation des navigateurs
 
-** le secteur ** d'activité est du texte libre pour l’instant (plus simple). Une liste imposée serait mieux plus tard,mais coûte plus de temps de maintenance.
+le secteur d'activité est du texte libre pour l’instant (plus simple). Une liste imposée serait mieux plus tard,mais coûte plus de temps de maintenance.
 
 
-**Dernière phrase du secrétariat** ( on veut la reconnaître tout de suite ). Elle parle de comment l’entreprise s’affiche dans l’admin et ailleurs.
+Dernière phrase du secrétariat ( on veut la reconnaître tout de suite ). Elle parle de comment l’entreprise s’affiche dans l’admin et ailleurs.
 
 # 3.2 Migrer
 
@@ -41,12 +41,6 @@ Maintenant nous avons 2 fichiers et pour revenir en arrière on fera  uv run man
 ### b.Les deux fichiers engendrés par uv à commiter :
 - pyproject.toml: liste les dépendances
 - uv.lock :verrouille les versions exactes
-
-Fais plusieurs commits clairs, par exemple :
-- Initialisation du projet avec uv et Django 
-- Ajout du modèle Entreprise 
--  Configuration de l’admin 
-- Première page de liste des entreprises
 
 
 ### Restitution
