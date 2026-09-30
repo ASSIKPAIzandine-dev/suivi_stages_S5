@@ -1,19 +1,15 @@
 from django.db import models
-
+from .personne import Personne
 
 class Etudiant(Personne):
-    nom = models.CharField(max_length=20)
-    prenom = models.CharField(max_length=20)
-    dateNaissance = models.DateField()
-    email = models.EmailField()
-    sexe = models.CharField()
+    matricule = models.CharField(max_length=20)
+    promotion = models.CharField()
 
 
-    
 
     class Meta:
         ordering = ["nom","prenom"]
-        verbose_name = "personne"
-        verbose_name_plural = "personnes"
+        verbose_name = "etudiant"
+        verbose_name_plural = "etudiants"
 
 

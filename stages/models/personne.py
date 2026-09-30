@@ -5,12 +5,15 @@ class Personne(models.Model):
     """ une entreprise susceptible d'accueillir un stagiaire"""
     nom = models.CharField(max_length=20)
     prenom = models.CharField(max_length=20)
-    dateNaissance = models.DateField()
+    date_naissance = models.DateField()
     email = models.EmailField()
-    sexe = models.CharField()
 
+    class Sexe(models.TextChoices):
+        HOMME = 'H', 'Homme'
+        FEMME = 'F', 'Femme'
 
-    
+    sexe=models.CharField(max_length=10, choices=Sexe)
+   
 
     class Meta:
         ordering = ["nom","prenom"]

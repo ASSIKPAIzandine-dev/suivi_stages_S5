@@ -9,6 +9,9 @@ Modélisation du domaine
 ### 2.1 
 
 ### 2.2 
-- oui personne doit avoir sa propre table 
+- Non personne ne doit pas avoir sa propre table ,parceque 
+
+
+
 
 
