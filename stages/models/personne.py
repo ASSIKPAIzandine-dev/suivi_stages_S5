@@ -5,18 +5,20 @@ class Personne(models.Model):
     """ une entreprise susceptible d'accueillir un stagiaire"""
     nom = models.CharField(max_length=20)
     prenom = models.CharField(max_length=20)
-    dateNaissance = models.CharField(max_length=80)
+    dateNaissance = models.DateField()
     email = models.EmailField()
+    sexe = models.CharField()
+
 
     
-    
-    
+
     class Meta:
-        ordering = ["nom"]
-        verbose_name = "entreprise"
-        verbose_name_plural = "entreprises"
+        ordering = ["nom","prenom"]
+        verbose_name = "personne"
+        verbose_name_plural = "personnes"
+        abstract = True
         
-    def __str__(self):
-        return f"{self.nom} ({self.ville})"
+    # def __str__(self):
+    #     return f"{self.nom} ({self.ville})"
         
     
