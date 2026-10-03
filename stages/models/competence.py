@@ -11,3 +11,5 @@ class Competence(models.Model):
         verbose_name = "competence"
         verbose_name_plural = "competences"
         
+
+        

@@ -7,11 +7,12 @@ class Candidature(models.Model):
     date_depot = models.DateField()
   
 
-
     class Meta:
         ordering = ["date_depot"]
         verbose_name = "candidature"
         verbose_name_plural = "candidature"
+
+
 
         
       
