@@ -1,27 +1,26 @@
 from django.db import models
 
+
 # Create your models here.
 class Personne(models.Model):
-    """ une entreprise susceptible d'accueillir un stagiaire"""
-    nom = models.CharField(max_length=20)
-    prenom = models.CharField(max_length=20)
+    """une entreprise susceptible d'accueillir un stagiaire"""
+
+    nom = models.CharField(max_length=100)
+    prenom = models.CharField(max_length=100)
     date_naissance = models.DateField()
-    email = models.EmailField()
+    email = models.EmailField(unique=True)
 
     class Sexe(models.TextChoices):
-        HOMME = 'H', 'Homme'
-        FEMME = 'F', 'Femme'
+        HOMME = "H", "Homme"
+        FEMME = "F", "Femme"
 
-    sexe=models.CharField(max_length=10, choices=Sexe)
-   
+    sexe = models.CharField(max_length=10, choices=Sexe)
 
     class Meta:
-        ordering = ["nom","prenom"]
+        ordering = ["nom", "prenom"]
         verbose_name = "personne"
         verbose_name_plural = "personnes"
         abstract = True
-        
-    # def __str__(self):
-    #     return f"{self.nom} ({self.ville})"
-        
-    
+
+    def __str__(self):
+        return f"{self.prenom} {self.nom}"
