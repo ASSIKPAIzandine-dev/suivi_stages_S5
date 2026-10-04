@@ -41,7 +41,35 @@ C'est la base de données qui verifie
 ### d. On constate que Dans le SQL généré pour les clés étrangères (FOREIGN KEY), il n'y a aucune mention de ON DELETE RESTRICT ou ON DELETE CASCADE. Les clés sont créées de manière standard.  C'est Django (au niveau applicatif Python) qui applique et gère lui-même les contraintes PROTECT ou CASCADE, et non la base de données directement . Si une ligne était supprimée directement en SQL (via un client de base de données externe ou un script brut), sans passer par l'ORM de Django, la règle PROTECT ne serait pas déclenchée, ce qui pourrait laisser la base dans un état incohérent avec des lignes orphelines.
 
 
+### 4. L’administration
+### a. Ce qui se passe : Django lève une erreur (ProtectedError) et refuse catégoriquement la suppression en affichant la liste des objets dépendants (les offres).Oui, c'est exactement ce qu'elle voulait. Elle a spécifié qu'on ne devait jamais perdre l'historique d'un stage
 
+### b. L'interface d'administration aurait affiché un écran de confirmationd'alerte listant l'entreprise, mais aussi toutes les offres liées, toutes les candidatures liées à ces offres, et tous les stages issus de ces candidatures. En validant, l'admin aurait tout supprimé en cascade,nettoyant la base de données mais violant définitivement la règle de conservation de l'historique.
+
+
+### 6. Ce que la base accepte
+### a. 
+### 1. Offre inversée (se termine avant de commencer) : Acceptée par le shell et la base.
+### 2. Offre au titre vide ("") : Acceptée par le shell et la base.
+### 3. Doublon de candidature : Refusée (génère une IntegrityError).
+
+### b.
+- Le problème commun aux deux premières erreurs : Il s'agit d'un manque de validation des règles métiers
+
+- Qui aurait dû refuser : La base de données de base (comme SQLite) n'analyse pas la cohérence des dates ou si une chaîne est vide par défaut.
+
+
+
+### Restitution (20 min)
+# 1.On ne peut pas supprimer une candidature qui a donné lieu à un stage, pour ne jamais perdre qui a fait quel stage, où, et avec qui.L’inverse (CASCADE) effacerait le stage en même temps que la candidature (perte d’historique) .
+
+
+# 2.Les règles on_delete sont appliquées par Django, pas par SQLite.
+- Situation : un admin ou un script SQL supprime directement une ligne stages_entreprise alors qu’il reste des offres (offres orphelines), base incohérente.
+
+
+# 3.La base a refusé la double candidature (contrainte UNIQUE) et accepté les deux autres.
+- Différence : unicité = contrainte de schéma ; dates cohérentes / titre non vide = règles métier absentes du modèle.
 
 
 

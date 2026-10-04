@@ -1,23 +1,20 @@
 from .entreprise import Entreprise
+from .competence import Competence
 from .personne import Personne
 from .etudiant import Etudiant
-from .enseignant_referent import EnseignantReferent
 from .tuteur_entreprise import TuteurEntreprise
-
+from .enseignant_referent import EnseignantReferent
 from .offre import Offre
-from .competence import Competence
 from .candidature import Candidature
-
+from .stage import Stage
 
 __all__ = [
-    "Candidature",
-    "Competence",
-    "EnseignantReferent",
     "Entreprise",
+    "Competence",
     "Etudiant",
-    "Offre",
-    "Personne",
     "TuteurEntreprise",
+    "EnseignantReferent",
+    "Offre",
+    "Candidature",
+    "Stage",
 ]
-
-
