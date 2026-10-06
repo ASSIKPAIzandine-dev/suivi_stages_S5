@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des offres</title>
+</head>
+<body>
+    <h1>Liste des offres </h1>
+    <div>
+        
+    </div>
+
+    <div>
+        <table border="1" cellpadding="10" cellspacing="1" >
+            <thead>
+                <tr>
+                    <th>Intitulé</th>
+                    <th>Entreprise</th>
+                    <th>Date debut</th>
+                    <th>Date Fin</th>
+                    <th>nombre de Place </th>
+                    <th>Competences</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for offre in offres %}
+                <tr>
+                    <td> {{ offre.titre }}  </td>
+                    <td> {{ offre.entreprise.nom }} ({{offre.entreprise.ville}}) </td>
+                    <td>{{offre.date_debut}} </td>
+                    <td> {{offre.date_fin}} </td>
+                    <td> {{offre.nb_places }} </td>
+                    
+                    {% for  competence in  offre.competences %}
+                    <td> {{competence.libelle}} </td>
+                    {% empty %}
+                       <tr>aucune competence retenue</tr>
+                    {% endfor %}
+                </tr>
+                {% empty %}
+                    <tr>
+                        Aucune offre enregistrée pour le moment
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

@@ -4,6 +4,8 @@ app_name = "stages"
 
 urlpatterns = [
     path("entreprises/", views.liste_entreprises, name="liste_entreprises"),
+    path("",views.liste_offres,name="liste_offres")
+    # path("offres/",views.liste_offres,name="liste_offres")
 ]
 
 
