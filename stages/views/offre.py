@@ -10,4 +10,5 @@ def liste_offres(request):
 
 
 def details_offre(request):
-    pass
+    print("detail est passé")
+    
