@@ -104,6 +104,8 @@ o2 = Offre.objects.create(
 )
 o2.competences.add(sysadmin)
 
+
+
 c1 = Candidature.objects.create(etudiant=e1, offre=o1, statut="RETENUE")
 c2 = Candidature.objects.create(etudiant=e2, offre=o1, statut="DEPOSEE")
 

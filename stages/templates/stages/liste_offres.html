@@ -1,56 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liste des offres</title>
-</head>
-<body>
-    <h1>Liste des offres </h1>
-    <div>
-        
-    </div>
+{% extends "stages/base.html" %}
 
-    <div>
-        <table border="1" cellpadding="10" cellspacing="1" >
-            <thead>
-                <tr>
-                    <th>Intitulé</th>
-                    <th>Entreprise</th>
-                    <th>Date debut</th>
-                    <th>Date Fin</th>
-                    <th>nombre de Place </th>
-                    <th>Competences</th>
-                </tr>
-            </thead>
-            <tbody>
+{% block title %}Offres de stage — IFNTI{% endblock %}
 
-                {% for offre in offres %}
+{% block content %}
+<h2>Offres de stage</h2>
+
+{% if offres %}
+    <table border="1" cellpadding="5" cellspacing="2" >
+        <thead>
+            <tr>
+                <th>Intitulé</th>
+                <th>Entreprise</th>
+                <th>Début</th>
+                <th>Fin</th>
+                <th>Places</th>
+                <th>Compétences</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for offre in offres %}
                 <tr>
-                    <td> 
-                        <a href="offres/1/">
-                          voir le detail concernant l'offre
-                        </a> 
-                        
+                    <td>
+                        <a href="{% url 'stages:detail_offre' offre.pk %}">
+                            {{ offre.titre }}
+                        </a>
                     </td>
-                    <td> {{ offre.entreprise.nom }} ({{offre.entreprise.ville}}) </td>
-                    <td>{{offre.date_debut}} </td>
-                    <td> {{offre.date_fin}} </td>
-                    <td> {{offre.nb_places }} </td>
-                    
-                    {% for  competence in  offre.competences.all %}
-                    <td> {{competence.libelle}} </td>
-                    {% empty %}
-                       <tr>aucune competence retenue</tr>
-                    {% endfor %}
+                    <td>
+                        <a href="{% url 'stages:detail_entreprise' offre.entreprise.pk %}">
+                            {{ offre.entreprise.nom }}
+                        </a>
+                    </td>
+                    <td>{{ offre.date_debut }}</td>
+                    <td>{{ offre.date_fin }}</td>
+                    <td>{{ offre.nb_places }}</td>
+                    <td>
+                        {% for c in offre.competences.all %}
+                            {{ c.libelle }}{% if not forloop.last %}, {% endif %}
+                        {% empty %}
+                            —
+                        {% endfor %}
+                    </td>
                 </tr>
-                {% empty %}
-                    <tr>
-                        Aucune offre enregistrée pour le moment
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
-</body>
-</html>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>Aucune offre de stage pour le moment.</p>
+{% endif %}
+
+{% endblock %}

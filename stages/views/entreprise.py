@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from stages.models import Entreprise
 
 
@@ -11,7 +11,12 @@ def liste_entreprises(request):
     )
 
 
-def details_entreprises(request):
-    pass
+def detail_entreprise(request, pk):
+    entreprise = get_object_or_404(Entreprise, pk=pk)
+    return render(
+            request,
+            "stages/detail_entreprise.html",
+            {"entreprise": entreprise},
+)
 
 

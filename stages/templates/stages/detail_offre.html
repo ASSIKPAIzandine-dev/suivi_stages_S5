@@ -1,0 +1,32 @@
+{% extends "stages/base.html" %} {% block title %}{{ offre.titre }} — Offre de
+stage{% endblock %} {% block content %}
+<article>
+  <h2>{{ offre.titre }}</h2>
+
+  <p>
+    <strong>Entreprise :</strong>
+    <a href="{% url 'stages:detail_entreprise' offre.entreprise.pk %}">
+      {{ offre.entreprise.nom }}
+    </a>
+    ({{ offre.entreprise.ville }})
+  </p>
+
+  <p>
+    <strong>Dates :</strong> du {{ offre.date_debut }} au {{ offre.date_fin }}
+  </p>
+
+  <p><strong>Places :</strong> {{ offre.nb_places }}</p>
+
+  <p>
+    <strong>Compétences demandées :</strong>
+    {{ offre.competences.all|join:", " |default:"aucune" }}
+  </p>
+
+  <h3>Description</h3>
+  <p>{{ offre.description|linebreaks }}</p>
+</article>
+
+<p>
+  <a href="{% url 'stages:liste_offres' %}">Retour aux offres</a>
+</p>
+{% endblock %}

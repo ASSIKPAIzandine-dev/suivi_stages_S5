@@ -1,0 +1,28 @@
+{% extends "stages/base.html" %} {% block title %}{{ entreprise.nom }} —
+Entreprise{% endblock %} {% block content %}
+<article>
+  <h2>{{ entreprise.nom }}</h2>
+  <p><strong>Ville :</strong> {{ entreprise.ville }}</p>
+  <p><strong>Secteur :</strong> {{ entreprise.secteur }}</p>
+  <p><strong>Contact :</strong> {{ entreprise.contact }}</p>
+  <h3>Offres publiées</h3>
+  {% if entreprise.offres.all %}
+  <ul>
+    {% for offre in entreprise.offres.all %}
+    <li>
+      <a href="{% url 'stages:detail_offre' offre.pk %}">{{ offre.titre }}</a>
+      — du {{ offre.date_debut }} au {{ offre.date_fin }} ({{ offre.nb_places }}
+      place{{ offre.nb_places|pluralize }})
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p>Aucune offre publiée pour le moment.</p>
+  {% endif %}
+</article>
+<p>
+  <a href="{% url 'stages:liste_entreprises' %}">Retour aux entreprises</a>
+  
+  <a href="{% url 'stages:liste_offres' %}">Voir les offres</a>
+</p>
+{% endblock %}
